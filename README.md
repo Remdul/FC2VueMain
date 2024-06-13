@@ -1,6 +1,6 @@
 # familyc2
 
-## Project setup
+## Project setup 
 ```
 npm install
 ```
