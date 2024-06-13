@@ -1,26 +1,41 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <amplify-authenticator>
+      <template v-slot:sign-up>
+        <amplify-sign-up
+          username-alias="email"
+          :form-fields="[
+            { type: 'username' },
+            { type: 'password' },
+            { type: 'email' },
+            { type: 'given_name', label: 'First Name', placeholder: 'Enter your first name', required: true },
+            { type: 'family_name', label: 'Last Name', placeholder: 'Enter your last name', required: true }
+          ]"
+        />
+      </template>
+      <template v-slot:default>
+        <router-view />
+        <TaskList />
+      </template>
+    </amplify-authenticator>
+  </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { AmplifyAuthenticator, AmplifySignUp } from '@aws-amplify/ui-vue';
+import TaskList from './components/TaskList.vue';
 
-export default {
+export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
+    AmplifyAuthenticator,
+    AmplifySignUp,
+    TaskList
   }
-}
+});
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import '~@aws-amplify/ui-vue/styles.css';
 </style>

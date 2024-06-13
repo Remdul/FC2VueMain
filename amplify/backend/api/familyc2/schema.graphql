@@ -7,3 +7,58 @@ type Todo @model {
   name: String!
   description: String
 }
+
+type User @model {
+  id: ID!
+  username: String!
+  role: String!
+  merits: Int!
+  tasks: [Task] @hasMany(indexName: "byUser", fields: ["id"])
+  infractions: [Infraction] @hasMany(indexName: "byUser", fields: ["id"])
+  logs: [Log] @hasMany(indexName: "byUser", fields: ["id"])
+  schedules: [Schedule] @hasMany(indexName: "byUser", fields: ["id"])
+}
+
+type Task @model {
+  id: ID!
+  title: String!
+  description: String
+  userId: ID! @index(name: "byUser")
+  user: User @belongsTo(fields: ["userId"])
+  dueDate: AWSDateTime
+  completed: Boolean
+  infractionTier: Int
+  resetPeriod: String
+}
+
+type Infraction @model {
+  id: ID!
+  userId: ID! @index(name: "byUser")
+  user: User @belongsTo(fields: ["userId"])
+  date: AWSDateTime
+  tier: Int
+}
+
+type Reward @model {
+  id: ID!
+  title: String!
+  cost: Int!
+}
+
+type Log @model {
+  id: ID!
+  userId: ID! @index(name: "byUser")
+  user: User @belongsTo(fields: ["userId"])
+  taskId: ID! @index(name: "byTask")
+  action: String!
+  timestamp: AWSDateTime!
+}
+
+type Schedule @model {
+  id: ID!
+  userId: ID! @index(name: "byUser")
+  user: User @belongsTo(fields: ["userId"])
+  type: String!
+  startDate: AWSDateTime!
+  endDate: AWSDateTime!
+}

@@ -9,11 +9,22 @@
       "UnauthRoleName": "amplify-familyc2-dev-da85a-unauthRole",
       "StackName": "amplify-familyc2-dev-da85a",
       "StackId": "arn:aws:cloudformation:us-east-1:791375310474:stack/amplify-familyc2-dev-da85a/5d76b740-2992-11ef-8e0a-125d1bfbf659",
-      "AmplifyAppId": "dpyhcr44x39b0"
+      "AmplifyAppId": "dpyhcr44x39b0",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-familyc2-dev-da85a-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "api": {
         "familyc2": {}
+      },
+      "auth": {
+        "familyc2028cadfd": {}
+      },
+      "function": {
+        "familyc2028cadfdPostConfirmation": {
+          "GROUP": "Everyone",
+          "deploymentBucketName": "amplify-familyc2-dev-da85a-deployment",
+          "s3Key": "amplify-builds/familyc2028cadfdPostConfirmation-362b654a6f6639665858-build.zip"
+        }
       }
     }
   }
